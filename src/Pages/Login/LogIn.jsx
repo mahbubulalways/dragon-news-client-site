@@ -1,11 +1,28 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const LogIn = () => {
+        const {SignIn}=useContext(AuthContext)
+        const handleSignIn=(event)=>{
+          event.preventDefault()
+          const form =event.target
+          const email =form.email.value
+          const password =form.password.value
+          event.target.reset()
+          SignIn(email,password)
+          .then(result=>{
+            console.log(result.user);
+           })
+           .catch(error=>{
+            console.log(error.message);
+           })
+        }
     return (
         <Container className='mx-auto w-50'>
-             <Form>
+             <Form onSubmit={handleSignIn}>
       <Form.Group className="mb-3" controlId="formGroupEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" name='email' placeholder="Enter email" required/>
@@ -17,7 +34,7 @@ const LogIn = () => {
       <Form.Group className="mb-3" id="formGridCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
-      <Button className='btn btn-primary'>submit</Button>
+      <input type="submit" name=''   className='btn btn-primary mb-2'/>
       <p>Dont have an account please <Link className='text-danger' to='/register'>Register</Link></p>
     </Form>
         </Container>

@@ -8,7 +8,10 @@ import { FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../../Provider/AuthProvider';
 
 const NavDragon = () => {
-    const {user}=useContext(AuthContext)
+    const {user,logOut}=useContext(AuthContext)
+    const handleSignOut=()=>{
+      logOut()
+    }
     return (
         <div>
             <Container>
@@ -25,7 +28,7 @@ const NavDragon = () => {
           <Nav className='d-flex align-items-center'>
             { user && <Nav.Link href="#deets"><h1><FaUserCircle></FaUserCircle></h1></Nav.Link>}
            
-           {user ?  <Button variant="dark">Log out</Button> : <span>
+           {user ?  <Button onClick={handleSignOut} variant="dark">Log out</Button> : <span>
            <Link to='/log-in'> <Button variant="dark">Log in</Button></Link> <Link to='/register'> <Button variant="dark">Register</Button></Link>
             </span>}
           </Nav>
