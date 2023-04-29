@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { useState } from 'react';
 const Register = () => {
+  const [disable,setDisable]=useState(false)
 const {createUserPassword} = useContext(AuthContext)
   const handleCreateUser=(event)=>{
    event.preventDefault()
@@ -18,6 +20,10 @@ const {createUserPassword} = useContext(AuthContext)
    .catch(error=>{
     console.log(error.message);
    })
+  }
+
+  const handleDisable=(event)=>{
+    setDisable(event.target.checked)
   }
     return (
         <div>
@@ -36,9 +42,9 @@ const {createUserPassword} = useContext(AuthContext)
         <Form.Control type="password" name='password' placeholder="Password" />
       </Form.Group>
       <Form.Group className="mb-3" id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Accept terms and conditions " required/>
+        <Form.Check onClick={handleDisable} type="checkbox" label={<span>Accept<Link to='/terms'> terms and conditions</Link></span>} required/>
       </Form.Group>
-       <input type="submit" name=''   className='btn btn-primary mb-2'/>
+       <input type="submit" name=''   className='btn btn-primary mb-2' disabled={!disable}/>
        <p>Already have an account please <Link className='text-danger' to='/log-in'>Log in</Link></p>
     </Form>
         </Container>

@@ -11,6 +11,12 @@ const NavDragon = () => {
     const {user,logOut}=useContext(AuthContext)
     const handleSignOut=()=>{
       logOut()
+      .then(result=>{
+        console.log(result.user);
+       })
+       .catch(error=>{
+        console.log(error.message);
+       })
     }
     return (
         <div>
