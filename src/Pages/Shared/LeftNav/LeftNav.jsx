@@ -5,7 +5,7 @@ import LeftIcon from './LeftIcon';
 const LeftNav = () => {
     const [data,setData]=useState([])
     useEffect(()=>{
-        fetch('http://localhost:10000/categories')
+        fetch('https://the-news-dragon-server-mahbubulalways.vercel.app/categories')
         .then(res=>res.json())
         .then(d=>setData(d))
         .catch(e=>console.log(e))

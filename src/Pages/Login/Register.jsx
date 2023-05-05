@@ -3,7 +3,9 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useState } from 'react';
+import useTitle from '../../hooks/useTitle';
 const Register = () => {
+  useTitle('Register')
   const [disable,setDisable]=useState(false)
 const {createUserPassword} = useContext(AuthContext)
   const handleCreateUser=(event)=>{
